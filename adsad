@@ -1,4 +1,3 @@
-loadstring(game:HttpGet('https://raw.githubusercontent.com/AnthonyIsntHere/anthonysrepository/main/scripts/AntiChatLogger.lua'))()
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 local Window = OrionLib:MakeWindow({Name = "V3rg. Horrific Housing | dsc.gg/v3rge | V1.2.0", HidePremium = false, SaveConfig = save, ConfigFolder = "OrionTest", ScriptIntro = enabled, IntroText = "V3rge's society"})
@@ -38,14 +37,6 @@ local Section = Tab:AddSection({
 OrionLib:Destroy()
     end
 })
-
-local Section = Tab:AddSection({
-    Name = "Help"
-})
-
- Tab:AddLabel("Your account must be 13+ for everything to work.")
- Tab:AddLabel("If something gets tagged, say something normal and try again.")
- Tab:AddLabel("For more info go and ask on the Discord")
 
 local Section = Tab:AddSection({
     Name = "More V3rge/B4krs Scripts"
@@ -348,18 +339,17 @@ local Section = Tab:AddSection({
 })
 
 Tab:AddToggle({
-  Name = "Token Autofarm (buggy)",
-  Default = false,
-  Callback = function(Value)
-   _G.TokenAutofarm = state
-while _G.TokenAutofarm. True do
-wait(0)
-local Target = game:GetService("ReplicatedStorage").LoginRewards;
-Target:FireServer();
-         end
+    Name = "Token Autofarm (buggy)",
+    Default = false,
+    Callback = function(Value)
+        _G.TokenAutofarm = not _G.TokenAutofarm or true -- Toggle the value
+        while _G.TokenAutofarm do
+            wait(0)
+            local Target = game:GetService("ReplicatedStorage").LoginRewards
+            Target:FireServer()
+        end
     end
 })
-
   Tab:AddButton({
    Name = "Grab 10 Tokens",
    Callback = function()
