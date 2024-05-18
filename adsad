@@ -1,0 +1,778 @@
+loadstring(game:HttpGet('https://raw.githubusercontent.com/AnthonyIsntHere/anthonysrepository/main/scripts/AntiChatLogger.lua'))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "V3rg. Horrific Housing | dsc.gg/v3rge | V1.2.0", HidePremium = false, SaveConfig = save, ConfigFolder = "OrionTest", ScriptIntro = enabled, IntroText = "V3rge's society"})
+
+local Tab = Window:MakeTab({
+    Name = "Home",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+    Name = "Discord"
+})
+
+local playerName = game.Players.LocalPlayer.Name
+
+Tab:AddButton({
+    Name = "Welcome " .. playerName .. "Join our discord: https://dsc.gg/v3rge",
+    Callback = function()
+    end
+})
+
+Tab:AddButton({
+    Name = "Discord | Click To Copy (TW: Small Server)",
+    Callback = function()
+setclipboard("https://dsc.gg/v3rge")
+    end
+}) 
+
+local Section = Tab:AddSection({
+    Name = "UI Stuff"
+})
+
+  Tab:AddButton({
+    Name = "Close Interface",
+    Callback = function()
+OrionLib:Destroy()
+    end
+})
+
+local Section = Tab:AddSection({
+    Name = "Help"
+})
+
+ Tab:AddLabel("Your account must be 13+ for everything to work.")
+ Tab:AddLabel("If something gets tagged, say something normal and try again.")
+ Tab:AddLabel("For more info go and ask on the Discord")
+
+local Section = Tab:AddSection({
+    Name = "More V3rge/B4krs Scripts"
+})
+
+  Tab:AddButton({
+    Name = "V3rg. Chat Bypasser",
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/BakaPraselol/bypass/main/OrionHub.dev"))()
+    end
+})
+
+local Tab = Window:MakeTab({
+    Name = "Main Scripts",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+    Name = "-Local Player-"
+})
+
+Tab:AddToggle({
+  Name = "Semi-GodMode",
+  Default = false,
+  Callback = function(Value)
+    _G.Godmode = state
+    while _G.Godmode do
+        local retardargs = {
+        ["dir"] = Vector3.new(0,0,0), -- The pos doesnt matter
+        ["origin"] = Vector3.new(0,0,0), -- The pos doesnt matter
+        ["shooter"] = game:GetService("Players").LocalPlayer -- Change to any player if LP doesnt work
+        }
+        game:GetService'ReplicatedStorage'["damageMe"]:FireServer(-math.huge, retardargs)  
+        wait()
+    end
+  end    
+})
+
+
+  Tab:AddButton({
+    Name = "Give Random Potion",
+         Callback = function()
+        local args = {
+            [1] = true
+        }
+
+        game:GetService("ReplicatedStorage").EventRemotes.Potion:FireServer(unpack(args))
+  end    
+})
+
+
+Tab:AddSlider({
+  Name = "WalkSpeed",
+  Min = 1,
+  Max = 350,
+  Default = 16,
+  Color = Color3.fromRGB(255,255,255),
+  Increment = 1,
+  ValueName = "Speed",
+  Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
+  end    
+})
+
+Tab:AddSlider({
+  Name = "Slider",
+  Min = 1,
+  Max = 16,
+  Default = 5,
+  Color = Color3.fromRGB(255,255,255),
+  Increment = 1,
+  ValueName = "JumpPower",
+  Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = (Value)
+  end    
+})
+
+  Tab:AddButton({
+  Name = "Air Jump/Inf Jump (toggle)",
+   Callback = function()
+       --Toggles the infinite jump between on or off on every script run
+_G.infinjump = not _G.infinjump
+
+if _G.infinJumpStarted == nil then
+  --Ensures this only runs once to save resources
+  _G.infinJumpStarted = true
+
+  --The actual infinite jump
+  local plr = game:GetService('Players').LocalPlayer
+  local m = plr:GetMouse()
+  m.KeyDown:connect(function(k)
+    if _G.infinjump then
+      if k:byte() == 32 then
+      humanoid = game:GetService'Players'.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
+      humanoid:ChangeState('Jumping')
+      wait()
+      humanoid:ChangeState('Seated')
+      end
+    end
+  end)
+end
+   end
+})
+
+  Tab:AddButton({
+   Name = "Noclip (Opens a UI)",
+   Callback = function()
+local Workspace = game:GetService("Workspace")
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+local Noclip = Instance.new("ScreenGui")
+local BG = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local Toggle = Instance.new("TextButton")
+local StatusPF = Instance.new("TextLabel")
+local Status = Instance.new("TextLabel")
+local Plr = Players.LocalPlayer
+local Clipon = false
+
+Noclip.Name = "Noclip"
+Noclip.Parent = game.CoreGui
+
+BG.Name = "BG"
+BG.Parent = Noclip
+BG.BackgroundColor3 = Color3.new(0.0980392, 0.0980392, 0.0980392)
+BG.BorderColor3 = Color3.new(0.0588235, 0.0588235, 0.0588235)
+BG.BorderSizePixel = 2
+BG.Position = UDim2.new(0.149479166, 0, 0.82087779, 0)
+BG.Size = UDim2.new(0, 210, 0, 127)
+BG.Active = true
+BG.Draggable = true
+
+Title.Name = "Title"
+Title.Parent = BG
+Title.BackgroundColor3 = Color3.new(0.266667, 0.00392157, 0.627451)
+Title.BorderColor3 = Color3.new(0.180392, 0, 0.431373)
+Title.BorderSizePixel = 2
+Title.Size = UDim2.new(0, 210, 0, 33)
+Title.Font = Enum.Font.Highway
+Title.Text = "Noclip"
+Title.TextColor3 = Color3.new(1, 1, 1)
+Title.FontSize = Enum.FontSize.Size32
+Title.TextSize = 30
+Title.TextStrokeColor3 = Color3.new(0.180392, 0, 0.431373)
+Title.TextStrokeTransparency = 0
+
+Toggle.Parent = BG
+Toggle.BackgroundColor3 = Color3.new(0.266667, 0.00392157, 0.627451)
+Toggle.BorderColor3 = Color3.new(0.180392, 0, 0.431373)
+Toggle.BorderSizePixel = 2
+Toggle.Position = UDim2.new(0.152380958, 0, 0.374192119, 0)
+Toggle.Size = UDim2.new(0, 146, 0, 36)
+Toggle.Font = Enum.Font.Highway
+Toggle.FontSize = Enum.FontSize.Size28
+Toggle.Text = "Toggle"
+Toggle.TextColor3 = Color3.new(1, 1, 1)
+Toggle.TextSize = 25
+Toggle.TextStrokeColor3 = Color3.new(0.180392, 0, 0.431373)
+Toggle.TextStrokeTransparency = 0
+
+StatusPF.Name = "StatusPF"
+StatusPF.Parent = BG
+StatusPF.BackgroundColor3 = Color3.new(1, 1, 1)
+StatusPF.BackgroundTransparency = 1
+StatusPF.Position = UDim2.new(0.314285725, 0, 0.708661377, 0)
+StatusPF.Size = UDim2.new(0, 56, 0, 20)
+StatusPF.Font = Enum.Font.Highway
+StatusPF.FontSize = Enum.FontSize.Size24
+StatusPF.Text = "Status:"
+StatusPF.TextColor3 = Color3.new(1, 1, 1)
+StatusPF.TextSize = 20
+StatusPF.TextStrokeColor3 = Color3.new(0.333333, 0.333333, 0.333333)
+StatusPF.TextStrokeTransparency = 0
+StatusPF.TextWrapped = true
+
+Status.Name = "Status"
+Status.Parent = BG
+Status.BackgroundColor3 = Color3.new(1, 1, 1)
+Status.BackgroundTransparency = 1
+Status.Position = UDim2.new(0.580952346, 0, 0.708661377, 0)
+Status.Size = UDim2.new(0, 56, 0, 20)
+Status.Font = Enum.Font.Highway
+Status.FontSize = Enum.FontSize.Size14
+Status.Text = "off"
+Status.TextColor3 = Color3.new(0.666667, 0, 0)
+Status.TextScaled = true
+Status.TextSize = 14
+Status.TextStrokeColor3 = Color3.new(0.180392, 0, 0.431373)
+Status.TextWrapped = true
+Status.TextXAlignment = Enum.TextXAlignment.Left
+
+
+Toggle.MouseButton1Click:connect(function()
+  if Status.Text == "off" then
+    Clipon = true
+    Status.Text = "on"
+    Status.TextColor3 = Color3.new(0,185,0)
+    Stepped = game:GetService("RunService").Stepped:Connect(function()
+      if not Clipon == false then
+        for a, b in pairs(Workspace:GetChildren()) do
+                if b.Name == Plr.Name then
+                for i, v in pairs(Workspace[Plr.Name]:GetChildren()) do
+                if v:IsA("BasePart") then
+                v.CanCollide = false
+                end end end end
+      else
+        Stepped:Disconnect()
+      end
+    end)
+  elseif Status.Text == "on" then
+    Clipon = false
+    Status.Text = "off"
+    Status.TextColor3 = Color3.new(170,0,0)
+  end
+end)
+  end
+})
+
+local Section = Tab:AddSection({
+    Name = "-items-"
+}) 
+
+  Tab:AddButton({
+   Name = "K.O Sword (Anvil must be on map)",
+   Callback = function()
+            local args = {
+    [1] = "Bat",
+    [2] = "Acceleration Coil",
+    [3] = "Sith lightsaber"
+}
+
+game:GetService("ReplicatedStorage").EventRemotes.ForgeUltimateSword:FireServer(unpack(args))
+   end
+})
+
+  Tab:AddButton({
+   Name = "Candy Cane Sword (Must be Santa)",
+   Callback = function()
+    for _,v in pairs(game.Players:GetPlayers()) do
+        local args = {
+            [1] = workspace.Plates[v.Name]
+        }
+
+        game:GetService("Players").LocalPlayer.Character.RemoteEvent:FireServer(unpack(args))
+    end  
+   end
+})
+
+Tab:AddToggle({
+  Name = "Fly without Wings",
+  Default = false,
+  Callback = function(state)
+    _G.Fly = state
+    while _G.Fly do
+        if game.Players.LocalPlayer.Character.Humanoid.MoveDirection.Magnitude > 0 then
+            game.ReplicatedStorage.EventRemotes.ForceFly:FireServer((game.Players.LocalPlayer.Character.Humanoid.Torso.Position - game.Workspace.CurrentCamera.CFrame.Position).unit)
+        else
+            game.ReplicatedStorage.EventRemotes.ForceFly:FireServer(Vector3.new(0,0,0))
+        end;
+        wait()
+    end    
+end
+})
+
+  Tab:AddButton({
+   Name = "Reset Orbital Strike Flute Cooldown (OSF Required)",
+   Callback = function()
+    local args = {
+        [1] = 0
+    }
+    game:GetService("Players").LocalPlayer.Character.Flute.Remote:FireServer(unpack(args))
+end
+}) 
+
+Tab:AddToggle({
+  Name = "Weapon Exploit (Weapon Must Be Equiped)",
+  Default = false,
+  Callback = function(state)
+    _G.True = state
+    while _G.True do 
+        for _,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+            if v:IsA("Tool") and v:FindFirstChild("Event") then 
+                v:FindFirstChild("Event"):FireServer()
+            end 
+        end 
+        wait()
+    end
+end
+}) 
+
+local Tab = Window:MakeTab({
+    Name = "Shop And Inventory",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+    Name = "-Tokens-"
+})
+
+Tab:AddToggle({
+  Name = "Token Autofarm (buggy)",
+  Default = false,
+  Callback = function(Value)
+   _G.TokenAutofarm = state
+while _G.TokenAutofarm. True do
+wait(0)
+local Target = game:GetService("ReplicatedStorage").LoginRewards;
+Target:FireServer();
+         end
+    end
+})
+
+  Tab:AddButton({
+   Name = "Grab 10 Tokens",
+   Callback = function()
+local Target = game:GetService("ReplicatedStorage").LoginRewards;
+Target:FireServer();
+      end
+})
+
+local Section = Tab:AddSection({
+    Name = "-Free items-"
+}) 
+
+  Tab:AddButton({
+   Name = "Furniture",
+   Callback = function()
+    local A_1 = 1e-59
+local A_2 = "Furniture"
+local event = game:GetService("ReplicatedStorage").ShopPurchase
+event:FireServer(A_1, A_2)
+end
+})
+
+  Tab:AddButton({
+   Name = "Ornament",
+   Callback = function()
+    local A_1 = 1e-59
+local A_2 = "Ornament"
+local event = game:GetService("ReplicatedStorage").ShopPurchase
+event:FireServer(A_1, A_2)
+end
+})
+
+  Tab:AddButton({
+   Name = "Death",
+   Callback = function()
+    local A_1 = 1e-59
+local A_2 = "Death"
+local event = game:GetService("ReplicatedStorage").ShopPurchase
+event:FireServer(A_1, A_2)
+end
+})
+
+  Tab:AddButton({
+   Name = "Pet Egg",
+   Callback = function()
+    local A_1 = 1e-59
+local A_2 = "Egg"
+local event = game:GetService("ReplicatedStorage").ShopPurchase
+event:FireServer(A_1, A_2)
+end
+})
+
+  Tab:AddButton({
+   Name = "Heart Balloons",
+   Callback = function()
+    local A_1 = 1e-59
+local A_2 = "HeartBalloons"
+local event = game:GetService("ReplicatedStorage").ShopPurchase
+event:FireServer(A_1, A_2)
+end
+})
+
+  Tab:AddButton({
+   Name = "Lunar Bundle",
+   Callback = function()
+    local A_1 = 1e-59
+local A_2 = "LunarBundle"
+local event = game:GetService("ReplicatedStorage").ShopPurchase
+event:FireServer(A_1, A_2)
+end
+})
+
+local Tab = Window:MakeTab({
+    Name = "Gamemodes and Events",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+    Name = "-Events-"
+})
+
+  Tab:AddButton({
+   Name = "Destroy Meteor",
+   Callback = function()
+    _G.Meteor = true 
+    while _G.Meteor do 
+        for _,v in pairs(workspace:GetChildren()) do 
+            if v.Name == "Meteor" then 
+                v:Destroy()
+            end 
+        end 
+        wait()
+    end 
+      end
+})
+
+  Tab:AddButton({
+   Name = "Destroy Icicle",
+   Callback = function()
+    workspace.DescendantAdded:Connect(function(d) 
+        if d.Name == "spike" or d.Name == "Spike" then 
+            d:Destroy()
+        end 
+    end)
+
+    _G.Spike = state 
+
+    while _G.Spike do 
+        for _,v in pairs(workspace.Plates:GetDescendants()) do 
+            if v.Name == "Spike" or v.Name == "spike" then 
+                v:Destroy()
+            end 
+        end
+        wait()
+    end 
+    end
+})
+
+  Tab:AddButton({
+   Name = "Destroy Corrupted Portal",
+   Callback = function()
+for _,v in pairs(workspace:GetDescendants()) do 
+        if v:IsA("BasePart") and v.Name == "Portal" and v.Color == Color3.new(255, 102, 204) then 
+            v:Destroy()
+        end 
+    end 
+end
+})
+
+  Tab:AddButton({
+   Name = "Destroy Coal",
+   Callback = function()
+    workspace.DescendantAdded:Connect(function(d)
+        if d.Name == "Coal" or d.Name == "coal" then 
+            d:Destroy()
+        end 
+    end)
+
+    _G.Coal = state 
+
+    while _G.Coal do 
+        for _,v in pairs(workspace:GetChildren()) do 
+            if v.Name == "Coal" or v.Name == "coal" then 
+                v:Destroy()
+            end 
+        end
+        wait()
+    end   
+    end
+})
+
+
+Tab:AddToggle({
+  Name = "Anti-Infection",
+  Default = false,
+  Callback = function(state)
+   _G.AntiZombie = state 
+    while _G.AntiZombie do 
+        wait()
+        for _,v in pairs(game.Players:GetPlayers()) do 
+            local isZombie = v.Character.Humanoid:FindFirstChild("isZombie")
+            if isZombie then 
+                for _, connection in pairs(getconnections(v.Character.HumanoidRootPart.Touched)) do 
+                    connection:Disable()
+                end 
+            end
+        end 
+    end
+   end
+   })
+
+  Tab:AddButton({
+   Name = "Anti-Deathnote",
+   Callback = function()
+      while true do wait() safeFromNote = state end
+end
+})
+
+Tab:AddToggle({
+  Name = "Anti-Infection",
+  Default = false,
+  Callback = function(Value)
+    local mt = getrawmetatable(game)
+    make_writeable(mt)
+
+    local namecall = mt.__namecall
+
+    mt.__namecall = newcclosure(function(self, ...)
+        local method = getnamecallmethod()
+        local args = {...}
+
+        if method == "FireServer" and tostring(self) == "damageMe" or tostring(self) == "GhasterBlaster" then
+        return
+        end
+        return namecall(self, table.unpack(args))
+    end)  
+end
+})
+
+  Tab:AddButton({
+   Name = "Leave Black Hole",
+   Callback = function()
+       local escape = game.Workspace:FindFirstChild("Portal"):FindFirstChild("EscapePortal") 
+    if escape then 
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = escape.CFrame
+    end
+end
+})
+
+
+  Tab:AddButton({
+   Name = "Get Dunce Hat",
+   Callback = function()
+    local args = {
+        [1] = "False"
+    }
+
+    game:GetService("ReplicatedStorage").EventRemotes.MathTest:FireServer(unpack(args))
+end
+})
+
+local Section = Tab:AddSection({
+    Name = "-Match-"
+})
+
+
+  Tab:AddButton({
+   Name = "Invisible House (disable by switching materials)",
+   Callback = function()
+    local A_1 = Color3.new(0, 0, 1)
+local A_2 = "ForceField"
+local A_3 = 1
+local event = game:GetService("ReplicatedStorage").HouseColour
+event:FireServer(A_1, A_2, A_3)
+end
+})
+
+  Tab:AddButton({
+   Name = "Open/Close All Doors",
+   Callback = function()
+    for _,v in pairs(workspace:GetDescendants()) do 
+        if v:IsA("ClickDetector") then 
+            fireclickdetector(v)
+        end 
+    end     
+end
+})
+
+Tab:AddToggle({
+  Name = "Anti-Void (Cant destroy)",
+  Default = false,
+  Callback = function(Value)
+   local part = Instance.new("Part")
+part.Name = "AntiFallPart"
+part.Size = Vector3.new(500, 1, 500)
+part.Transparency = 1 -- something like 1 to invisible
+part.Anchored = true
+part.Position = Vector3.new(-1, -3, 66)
+part.Parent = game.Workspace
+end
+})
+
+local Section = Tab:AddSection({
+    Name = "-Gamemodes-"
+})
+
+ Tab:AddLabel("Spleef")
+
+Tab:AddToggle({
+  Name = "Weapon Exploit (Weapon Must Be Equiped)",
+  Default = false,
+  Callback = function(state)
+    _G.Enabled = state 
+    while _G.Enabled do 
+        wait()
+        for _,v in pairs(workspace["spleef gamemode"]:GetChildren()) do 
+            firetouchinterest(game.Players.LocalPlayer.Character["HumanoidRootPart"],v, 0)
+        end     
+    end
+end
+})
+
+  Tab:AddButton({
+   Name = "Anti-Sweeper",
+   Callback = function()
+    for _,v in pairs(workspace:GetDescendants()) do 
+        if v.Name == "Spinner" then 
+            v:Destroy()
+        end 
+    end
+end
+})
+
+local Tab = Window:MakeTab({
+    Name = "Teleportation",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+    Name = "-Player-"
+})
+
+  Tab:AddButton({
+   Name = "Teleport To Player (Opens a UI + Usernames only)",
+   Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/AbDM2er1"))()
+end,
+})
+
+local Section = Tab:AddSection({
+    Name = "-Game-"
+})
+
+ Tab:AddButton({
+   Name = "Obby End",
+   Callback = function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(65, 128.95, -119.5)
+end
+})
+
+ Tab:AddButton({
+   Name = "Spleef (Recomended)",
+   Callback = function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1, 14.53, -17)
+end
+})
+
+ Tab:AddButton({
+   Name = "Safe Place (Reset Twice to Leave)",
+   Callback = function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2000,2000,2000)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+end,
+})
+
+local Tab = Window:MakeTab({
+    Name = "Misc",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+    Name = "-Extra Scripts-"
+})
+
+ Tab:AddButton({
+   Name = "Player Outline, Team and Name ESP",
+   Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP'))()
+   end,
+})
+
+  Tab:AddButton({
+    Name = "Infinite yield",
+    Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+    end
+})
+
+  Tab:AddButton({
+    Name = "Anti-Fling",
+    Callback = function()
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Player = Players.LocalPlayer
+
+RunService.Stepped:Connect(function()
+    for _, CoPlayer in pairs(Players:GetChildren()) do
+        if CoPlayer ~= Player and CoPlayer.Character then
+            for _, Part in pairs(CoPlayer.Character:GetChildren()) do
+                if Part.Name == "HumanoidRootPart" then
+                    Part.CanCollide = false
+                end
+            end
+        end
+    end
+
+    for _, Accessory in pairs(workspace:GetChildren()) do
+        if Accessory:IsA("Accessory") and Accessory:FindFirstChildWhichIsA("Part") then
+            Accessory:FindFirstChildWhichIsA("Part"):Destroy()
+        end
+    end
+end)
+    end
+})
+
+  Tab:AddButton({
+    Name = "Infinite Jump (toggle)",
+    Callback = function()
+_G.infinjump = not _G.infinjump
+
+if _G.infinJumpStarted == nil then
+  --Ensures this only runs once to save resources
+  _G.infinJumpStarted = true
+
+  --Notifies readiness
+  game.StarterGui:SetCore("SendNotification", {Title="Misc"; Text="Infinite Jump Activated!"; Duration=5;})
+
+  --The actual infinite jump
+  local plr = game:GetService('Players').LocalPlayer
+  local m = plr:GetMouse()
+  m.KeyDown:connect(function(k)
+    if _G.infinjump then
+      if k:byte() == 32 then
+      humanoid = game:GetService'Players'.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
+      humanoid:ChangeState('Jumping')
+      wait()
+      humanoid:ChangeState('Seated')
+      end
+    end
+  end)
+end
+    end
+})
