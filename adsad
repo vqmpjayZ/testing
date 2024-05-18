@@ -1,68 +1,91 @@
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-
-local Window = OrionLib:MakeWindow({Name = "V3rg. Horrific Housing | dsc.gg/v3rge | V1.2.0", HidePremium = false, SaveConfig = save, ConfigFolder = "OrionTest", ScriptIntro = enabled, IntroText = "V3rge's society"})
-
-local Tab = Window:MakeTab({
-    Name = "Home",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/Rafacasari/ArrayField/main/v2.lua'))()
+local Window = Rayfield:CreateWindow({
+   Name = "V3rg. Horrific Housing V1",
+   LoadingTitle = "V3rge's Horrific Housing Script",
+   LoadingSubtitle = "discord.gg/mtjsvyNkYG",
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Big Hub"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided",
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
 })
 
-local Section = Tab:AddSection({
-    Name = "Discord"
+local Tab = Window:CreateTab("Home")
+local Paragraph = Tab:CreateParagraph({Title = "Info", Content = "join the new discord: 'discord.gg/mtjsvyNkYG' ; Made by V3rge Past know as B4krs. Version 1 updt: Realesed! ; Version 1.25 updt: coming soon ; Current vrs: 1"})
+local Button = Tab:CreateButton({
+   Name = "Discord | Click To Copy",
+   Callback = function()
+setclipboard("discord.gg/mtjsvyNkYG")
+   end,
 })
 
-local playerName = game.Players.LocalPlayer.Name
-
-Tab:AddButton({
-    Name = "Welcome " .. playerName .. " Join our discord: https://dsc.gg/v3rge",
-    Callback = function()
-    end
+local Keybind = Tab:CreateKeybind({
+   Name = "Keybind",
+   CurrentKeybind = "K",
+   HoldToInteract = false,
+   Flag = "Keybind1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Keybind)
+   -- The function that takes place when the keybind is pressed
+   -- The variable (Keybind) is a boolean for whether the keybind is being held or not (HoldToInteract needs to be true)
+   end,
 })
 
-Tab:AddButton({
-    Name = "Discord | Click To Copy (TW: Small Server)",
-    Callback = function()
-setclipboard("https://dsc.gg/v3rge")
-    end
-}) 
-
-local Section = Tab:AddSection({
-    Name = "UI Stuff"
+local Button = Tab:CreateButton({
+   Name = "Extra Keyboard (MOBILE Support)",
+   Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+   end,
 })
 
-  Tab:AddButton({
-    Name = "Close Interface",
-    Callback = function()
-OrionLib:Destroy()
-    end
+
+local Label = Tab:CreateLabel("If you want to Unhide the interface click K or your selected Keybind ↓")
+local Button = Tab:CreateButton({
+   Name = "Hide Interface",
+   Callback = function()
+game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.K,false,game)
+   end,
 })
 
-local Section = Tab:AddSection({
-    Name = "More V3rge/B4krs Scripts"
+
+local Button = Tab:CreateButton({
+   Name = "Close Interface",
+   Callback = function()
+ Rayfield:Destroy()
+   end,
 })
 
-  Tab:AddButton({
-    Name = "V3rg. Chat Bypasser",
-    Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/BakaPraselol/bypass/main/OrionHub.dev"))()
-    end
+local Section = Tab:CreateSection("-More Scripts By Me-")
+local Button = Tab:CreateButton({
+   Name = "B4krs Chat Bypass (Closes this one)",
+   Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/BakaPraselol/MRCBV4LSB4KRS/main/Loader"))()
+   end,
 })
 
-local Tab = Window:MakeTab({
-    Name = "Main Scripts",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
+local Tab = Window:CreateTab("Main Scripts")
+local Section = Tab:CreateSection("-Local Player-")
 
-local Section = Tab:AddSection({
-    Name = "-Local Player-"
-})
-
-Tab:AddToggle({
-  Name = "Semi-GodMode",
-  Default = false,
-  Callback = function(Value)
+local Toggle = Tab:CreateToggle({
+   Name = "Semi Godmode",
+   CurrentValue = false,
+   Flag = "Toggle1",
+   Callback = function(state)
     _G.Godmode = state
     while _G.Godmode do
         local retardargs = {
@@ -72,77 +95,74 @@ Tab:AddToggle({
         }
         game:GetService'ReplicatedStorage'["damageMe"]:FireServer(-math.huge, retardargs)  
         wait()
-    end
-  end    
+    end   
+   end,
 })
 
 
-  Tab:AddButton({
-    Name = "Give Random Potion",
-         Callback = function()
+local Button = Tab:CreateButton({
+   Name = "Give Random Potion",
+   Callback = function()  
         local args = {
             [1] = true
         }
-
+        
         game:GetService("ReplicatedStorage").EventRemotes.Potion:FireServer(unpack(args))
-  end    
+   end,
 })
 
 
-Tab:AddSlider({
-  Name = "WalkSpeed",
-  Min = 1,
-  Max = 350,
-  Default = 16,
-  Color = Color3.fromRGB(255,255,255),
-  Increment = 1,
-  ValueName = "Speed",
-  Callback = function(Value)
+local Slider = Tab:CreateSlider({
+   Name = "WalkSpeed Slider",
+   Range = {1, 350},
+   Increment = 1,
+   Suffix = "Speed",
+   CurrentValue = 16,
+   Flag = "sliderws", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
-  end    
+   end,
 })
 
-Tab:AddSlider({
-  Name = "JumpPower",
-  Min = 36,
-  Max = 360,
-  Default = 5,
-  Color = Color3.fromRGB(255,255,255),
-  Increment = 1,
-  ValueName = "JumpPower",
-  Callback = function(Value)
+local Slider = Tab:CreateSlider({
+   Name = "JumpPower Slider",
+   Range = {1, 350},
+   Increment = 1,
+   Suffix = "Speed",
+   CurrentValue = 50,
+   Flag = "sliderjp", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = (Value)
-  end    
+   end,
 })
 
-  Tab:AddButton({
-  Name = "Air Jump/Inf Jump (toggle)",
+local Button = Tab:CreateButton({
+   Name = "Air Jump/Inf Jump (toggle)",
    Callback = function()
        --Toggles the infinite jump between on or off on every script run
 _G.infinjump = not _G.infinjump
 
 if _G.infinJumpStarted == nil then
-  --Ensures this only runs once to save resources
-  _G.infinJumpStarted = true
-
-  --The actual infinite jump
-  local plr = game:GetService('Players').LocalPlayer
-  local m = plr:GetMouse()
-  m.KeyDown:connect(function(k)
-    if _G.infinjump then
-      if k:byte() == 32 then
-      humanoid = game:GetService'Players'.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
-      humanoid:ChangeState('Jumping')
-      wait()
-      humanoid:ChangeState('Seated')
-      end
-    end
-  end)
+	--Ensures this only runs once to save resources
+	_G.infinJumpStarted = true
+	
+	--The actual infinite jump
+	local plr = game:GetService('Players').LocalPlayer
+	local m = plr:GetMouse()
+	m.KeyDown:connect(function(k)
+		if _G.infinjump then
+			if k:byte() == 32 then
+			humanoid = game:GetService'Players'.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
+			humanoid:ChangeState('Jumping')
+			wait()
+			humanoid:ChangeState('Seated')
+			end
+		end
+	end)
 end
-   end
+   end,
 })
-
-  Tab:AddButton({
+local Button = Tab:CreateButton({
    Name = "Noclip (Opens a UI)",
    Callback = function()
 local Workspace = game:GetService("Workspace")
@@ -231,36 +251,34 @@ Status.TextXAlignment = Enum.TextXAlignment.Left
 
 
 Toggle.MouseButton1Click:connect(function()
-  if Status.Text == "off" then
-    Clipon = true
-    Status.Text = "on"
-    Status.TextColor3 = Color3.new(0,185,0)
-    Stepped = game:GetService("RunService").Stepped:Connect(function()
-      if not Clipon == false then
-        for a, b in pairs(Workspace:GetChildren()) do
+	if Status.Text == "off" then
+		Clipon = true
+		Status.Text = "on"
+		Status.TextColor3 = Color3.new(0,185,0)
+		Stepped = game:GetService("RunService").Stepped:Connect(function()
+			if not Clipon == false then
+				for a, b in pairs(Workspace:GetChildren()) do
                 if b.Name == Plr.Name then
                 for i, v in pairs(Workspace[Plr.Name]:GetChildren()) do
                 if v:IsA("BasePart") then
                 v.CanCollide = false
                 end end end end
-      else
-        Stepped:Disconnect()
-      end
-    end)
-  elseif Status.Text == "on" then
-    Clipon = false
-    Status.Text = "off"
-    Status.TextColor3 = Color3.new(170,0,0)
-  end
+			else
+				Stepped:Disconnect()
+			end
+		end)
+	elseif Status.Text == "on" then
+		Clipon = false
+		Status.Text = "off"
+		Status.TextColor3 = Color3.new(170,0,0)
+	end
 end)
-  end
+  end,
 })
 
-local Section = Tab:AddSection({
-    Name = "-items-"
-}) 
+local Section = Tab:CreateSection("-Items-")
 
-  Tab:AddButton({
+local Button = Tab:CreateButton({
    Name = "K.O Sword (Anvil must be on map)",
    Callback = function()
             local args = {
@@ -270,26 +288,27 @@ local Section = Tab:AddSection({
 }
 
 game:GetService("ReplicatedStorage").EventRemotes.ForgeUltimateSword:FireServer(unpack(args))
-   end
+   end,
 })
 
-  Tab:AddButton({
+local Button = Tab:CreateButton({
    Name = "Candy Cane Sword (Must be Santa)",
    Callback = function()
     for _,v in pairs(game.Players:GetPlayers()) do
         local args = {
             [1] = workspace.Plates[v.Name]
         }
-
+        
         game:GetService("Players").LocalPlayer.Character.RemoteEvent:FireServer(unpack(args))
     end  
-   end
+   end,
 })
 
-Tab:AddToggle({
-  Name = "Fly without Wings",
-  Default = false,
-  Callback = function(state)
+local Toggle = Tab:CreateToggle({
+   Name = "Fly Without Wings",
+   CurrentValue = false,
+   Flag = "Toggle1",
+   Callback = function(state)
     _G.Fly = state
     while _G.Fly do
         if game.Players.LocalPlayer.Character.Humanoid.MoveDirection.Magnitude > 0 then
@@ -299,23 +318,24 @@ Tab:AddToggle({
         end;
         wait()
     end    
-end
-})
-
-  Tab:AddButton({
+end,
+})   
+local Button = Tab:CreateButton({
    Name = "Reset Orbital Strike Flute Cooldown (OSF Required)",
    Callback = function()
     local args = {
         [1] = 0
     }
     game:GetService("Players").LocalPlayer.Character.Flute.Remote:FireServer(unpack(args))
-end
+end,
 }) 
 
-Tab:AddToggle({
-  Name = "Weapon Exploit (Weapon Must Be Equiped)",
-  Default = false,
-  Callback = function(state)
+
+local Toggle = Tab:CreateToggle({
+   Name = "Weapon Exploit (Weapon Must Be Equiped)",
+   CurrentValue = false,
+   Flag = "Toggle1",
+   Callback = function(state)
     _G.True = state
     while _G.True do 
         for _,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
@@ -325,114 +345,94 @@ Tab:AddToggle({
         end 
         wait()
     end
-end
+end,
 }) 
 
-local Tab = Window:MakeTab({
-    Name = "Shop And Inventory",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
+
+local Tab = Window:CreateTab("Shop And Inventory")
+local Section = Tab:CreateSection("-Tokens-")
+local Toggle = Tab:CreateToggle({
+   Name = "Token Autofarm (Cant Stop)",
+   CurrentValue = false,
+   Flag = "Toggle1",
+   Callback = function(state)
+while true do
+wait(0)
+local Target = game:GetService("ReplicatedStorage").LoginRewards;
+Target:FireServer();
+         end
+    end,
 })
 
-local Section = Tab:AddSection({
-    Name = "-Tokens-"
-})
 
-Tab:AddToggle({
-    Name = "Token Autofarm (buggy)",
-    Default = false,
-    Callback = function(Value)
-        _G.TokenAutofarm = not _G.TokenAutofarm or true -- Toggle the value
-        while _G.TokenAutofarm do
-            wait(0)
-            local Target = game:GetService("ReplicatedStorage").LoginRewards
-            Target:FireServer()
-        end
-    end
-})
-  Tab:AddButton({
+local Button = Tab:CreateButton({
    Name = "Grab 10 Tokens",
    Callback = function()
 local Target = game:GetService("ReplicatedStorage").LoginRewards;
 Target:FireServer();
-      end
+      end,
 })
 
-local Section = Tab:AddSection({
-    Name = "-Free items-"
-}) 
+local Section = Tab:CreateSection("-Free Items-")
 
-  Tab:AddButton({
+local Button = Tab:CreateButton({
    Name = "Furniture",
    Callback = function()
     local A_1 = 1e-59
 local A_2 = "Furniture"
 local event = game:GetService("ReplicatedStorage").ShopPurchase
 event:FireServer(A_1, A_2)
-end
+end,
 })
-
-  Tab:AddButton({
+local Button = Tab:CreateButton({
    Name = "Ornament",
    Callback = function()
     local A_1 = 1e-59
 local A_2 = "Ornament"
 local event = game:GetService("ReplicatedStorage").ShopPurchase
 event:FireServer(A_1, A_2)
-end
+end,
 })
-
-  Tab:AddButton({
+local Button = Tab:CreateButton({
    Name = "Death",
    Callback = function()
     local A_1 = 1e-59
 local A_2 = "Death"
 local event = game:GetService("ReplicatedStorage").ShopPurchase
 event:FireServer(A_1, A_2)
-end
+end,
 })
-
-  Tab:AddButton({
+local Button = Tab:CreateButton({
    Name = "Pet Egg",
    Callback = function()
     local A_1 = 1e-59
 local A_2 = "Egg"
 local event = game:GetService("ReplicatedStorage").ShopPurchase
 event:FireServer(A_1, A_2)
-end
+end,
 })
-
-  Tab:AddButton({
+local Button = Tab:CreateButton({
    Name = "Heart Balloons",
    Callback = function()
     local A_1 = 1e-59
 local A_2 = "HeartBalloons"
 local event = game:GetService("ReplicatedStorage").ShopPurchase
 event:FireServer(A_1, A_2)
-end
+end,
 })
-
-  Tab:AddButton({
+local Button = Tab:CreateButton({
    Name = "Lunar Bundle",
    Callback = function()
     local A_1 = 1e-59
 local A_2 = "LunarBundle"
 local event = game:GetService("ReplicatedStorage").ShopPurchase
 event:FireServer(A_1, A_2)
-end
+end,
 })
 
-local Tab = Window:MakeTab({
-    Name = "Gamemodes and Events",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
-
-local Section = Tab:AddSection({
-    Name = "-Events-"
-})
-
-  Tab:AddButton({
+local Tab = Window:CreateTab("Gamemodes and Events")
+local Section = Tab:CreateSection("-Events-")
+local Button = Tab:CreateButton({
    Name = "Destroy Meteor",
    Callback = function()
     _G.Meteor = true 
@@ -444,10 +444,10 @@ local Section = Tab:AddSection({
         end 
         wait()
     end 
-      end
+      end,
 })
 
-  Tab:AddButton({
+local Button = Tab:CreateButton({
    Name = "Destroy Icicle",
    Callback = function()
     workspace.DescendantAdded:Connect(function(d) 
@@ -455,9 +455,9 @@ local Section = Tab:AddSection({
             d:Destroy()
         end 
     end)
-
+    
     _G.Spike = state 
-
+    
     while _G.Spike do 
         for _,v in pairs(workspace.Plates:GetDescendants()) do 
             if v.Name == "Spike" or v.Name == "spike" then 
@@ -466,10 +466,10 @@ local Section = Tab:AddSection({
         end
         wait()
     end 
-    end
+    end,
 })
 
-  Tab:AddButton({
+local Button = Tab:CreateButton({
    Name = "Destroy Corrupted Portal",
    Callback = function()
 for _,v in pairs(workspace:GetDescendants()) do 
@@ -477,10 +477,10 @@ for _,v in pairs(workspace:GetDescendants()) do
             v:Destroy()
         end 
     end 
-end
+end,
 })
 
-  Tab:AddButton({
+local Button = Tab:CreateButton({
    Name = "Destroy Coal",
    Callback = function()
     workspace.DescendantAdded:Connect(function(d)
@@ -488,9 +488,9 @@ end
             d:Destroy()
         end 
     end)
-
+    
     _G.Coal = state 
-
+    
     while _G.Coal do 
         for _,v in pairs(workspace:GetChildren()) do 
             if v.Name == "Coal" or v.Name == "coal" then 
@@ -499,14 +499,14 @@ end
         end
         wait()
     end   
-    end
+    end,
 })
 
-
-Tab:AddToggle({
-  Name = "Anti-Infection",
-  Default = false,
-  Callback = function(state)
+local Toggle = Tab:CreateToggle({
+   Name = "Anti Infection",
+   CurrentValue = false,
+   Flag = "Toggle1",
+   Callback = function(state)
    _G.AntiZombie = state 
     while _G.AntiZombie do 
         wait()
@@ -519,65 +519,61 @@ Tab:AddToggle({
             end
         end 
     end
-   end
+   end,
    })
-
-  Tab:AddButton({
+   
+   local Button = Tab:CreateButton({
    Name = "Anti-Deathnote",
    Callback = function()
       while true do wait() safeFromNote = state end
-end
+end,
 })
 
-Tab:AddToggle({
-  Name = "Anti-Infection",
-  Default = false,
-  Callback = function(Value)
+local Toggle = Tab:CreateToggle({
+   Name = "Anti Projectile Damage (Disables Godmode)",
+   CurrentValue = false,
+   Flag = "Toggle1",
+   Callback = function(Value)
     local mt = getrawmetatable(game)
     make_writeable(mt)
-
+    
     local namecall = mt.__namecall
-
+    
     mt.__namecall = newcclosure(function(self, ...)
         local method = getnamecallmethod()
         local args = {...}
-
+    
         if method == "FireServer" and tostring(self) == "damageMe" or tostring(self) == "GhasterBlaster" then
         return
         end
         return namecall(self, table.unpack(args))
     end)  
-end
+end,
 })
 
-  Tab:AddButton({
+   local Button = Tab:CreateButton({
    Name = "Leave Black Hole",
    Callback = function()
        local escape = game.Workspace:FindFirstChild("Portal"):FindFirstChild("EscapePortal") 
     if escape then 
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = escape.CFrame
     end
-end
+end,
 })
 
-
-  Tab:AddButton({
+   local Button = Tab:CreateButton({
    Name = "Get Dunce Hat",
    Callback = function()
     local args = {
         [1] = "False"
     }
-
+    
     game:GetService("ReplicatedStorage").EventRemotes.MathTest:FireServer(unpack(args))
-end
+end,
 })
 
-local Section = Tab:AddSection({
-    Name = "-Match-"
-})
-
-
-  Tab:AddButton({
+local Section = Tab:CreateSection("-Match-")
+   local Button = Tab:CreateButton({
    Name = "Invisible House (disable by switching materials)",
    Callback = function()
     local A_1 = Color3.new(0, 0, 1)
@@ -585,10 +581,10 @@ local A_2 = "ForceField"
 local A_3 = 1
 local event = game:GetService("ReplicatedStorage").HouseColour
 event:FireServer(A_1, A_2, A_3)
-end
+end,
 })
 
-  Tab:AddButton({
+   local Button = Tab:CreateButton({
    Name = "Open/Close All Doors",
    Callback = function()
     for _,v in pairs(workspace:GetDescendants()) do 
@@ -596,13 +592,13 @@ end
             fireclickdetector(v)
         end 
     end     
-end
+end,
 })
-
-Tab:AddToggle({
-  Name = "Anti-Void (Cant destroy)",
-  Default = false,
-  Callback = function(Value)
+local Toggle = Tab:CreateToggle({
+   Name = "Anti-Void (Cant destroy)",
+   CurrentValue = false,
+   Flag = "Toggle1",
+   Callback = function(Value)
    local part = Instance.new("Part")
 part.Name = "AntiFallPart"
 part.Size = Vector3.new(500, 1, 500)
@@ -610,19 +606,18 @@ part.Transparency = 1 -- something like 1 to invisible
 part.Anchored = true
 part.Position = Vector3.new(-1, -3, 66)
 part.Parent = game.Workspace
-end
+end,
 })
 
-local Section = Tab:AddSection({
-    Name = "-Gamemodes-"
-})
+local Section = Tab:CreateSection("-Gamemodes-")
+local Paragraph = Tab:CreateParagraph({Title = "There's not much here", Content = "We only made Scripts for 2 gamemodes but were gonna attempt to add 2 more soon"})
 
- Tab:AddLabel("Spleef")
-
-Tab:AddToggle({
-  Name = "Weapon Exploit (Weapon Must Be Equiped)",
-  Default = false,
-  Callback = function(state)
+local Label = Tab:CreateLabel("Spleef")
+local Toggle = Tab:CreateToggle({
+   Name = "Delete Spleef Tiles (Gamemode)",
+   CurrentValue = false,
+   Flag = "Toggle1",
+   Callback = function(state)
     _G.Enabled = state 
     while _G.Enabled do 
         wait()
@@ -630,10 +625,11 @@ Tab:AddToggle({
             firetouchinterest(game.Players.LocalPlayer.Character["HumanoidRootPart"],v, 0)
         end     
     end
-end
+end,
 })
 
-  Tab:AddButton({
+local Label = Tab:CreateLabel("Sweeper")
+   local Button = Tab:CreateButton({
    Name = "Anti-Sweeper",
    Callback = function()
     for _,v in pairs(workspace:GetDescendants()) do 
@@ -641,45 +637,33 @@ end
             v:Destroy()
         end 
     end
-end
+end,
 })
 
-local Tab = Window:MakeTab({
-    Name = "Teleportation",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
-
-local Section = Tab:AddSection({
-    Name = "-Player-"
-})
-
-  Tab:AddButton({
+local Tab = Window:CreateTab("Teleportation")
+local Section = Tab:CreateSection("-Player-")
+   local Button = Tab:CreateButton({
    Name = "Teleport To Player (Opens a UI + Usernames only)",
    Callback = function()
 loadstring(game:HttpGet("https://pastebin.com/raw/AbDM2er1"))()
 end,
 })
 
-local Section = Tab:AddSection({
-    Name = "-Game-"
-})
+local Section = Tab:CreateSection("-Game-")
 
- Tab:AddButton({
+   local Button = Tab:CreateButton({
    Name = "Obby End",
    Callback = function()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(65, 128.95, -119.5)
-end
+end,
 })
-
- Tab:AddButton({
+   local Button = Tab:CreateButton({
    Name = "Spleef (Recomended)",
    Callback = function()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1, 14.53, -17)
-end
+end,
 })
-
- Tab:AddButton({
+   local Button = Tab:CreateButton({
    Name = "Safe Place (Reset Twice to Leave)",
    Callback = function()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2000,2000,2000)
@@ -687,82 +671,22 @@ end
 end,
 })
 
-local Tab = Window:MakeTab({
-    Name = "Misc",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
-
-local Section = Tab:AddSection({
-    Name = "-Extra Scripts-"
-})
-
- Tab:AddButton({
+local Tab = Window:CreateTab("Visuals")
+local Section = Tab:CreateSection("-ESP-")
+local Button = Tab:CreateButton({
    Name = "Player Outline, Team and Name ESP",
    Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP'))()
    end,
 })
 
-  Tab:AddButton({
-    Name = "Infinite yield",
-    Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-    end
-})
-
-  Tab:AddButton({
-    Name = "Anti-Fling",
-    Callback = function()
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local Player = Players.LocalPlayer
-
-RunService.Stepped:Connect(function()
-    for _, CoPlayer in pairs(Players:GetChildren()) do
-        if CoPlayer ~= Player and CoPlayer.Character then
-            for _, Part in pairs(CoPlayer.Character:GetChildren()) do
-                if Part.Name == "HumanoidRootPart" then
-                    Part.CanCollide = false
-                end
-            end
-        end
-    end
-
-    for _, Accessory in pairs(workspace:GetChildren()) do
-        if Accessory:IsA("Accessory") and Accessory:FindFirstChildWhichIsA("Part") then
-            Accessory:FindFirstChildWhichIsA("Part"):Destroy()
-        end
-    end
-end)
-    end
-})
-
-  Tab:AddButton({
-    Name = "Infinite Jump (toggle)",
-    Callback = function()
-_G.infinjump = not _G.infinjump
-
-if _G.infinJumpStarted == nil then
-  --Ensures this only runs once to save resources
-  _G.infinJumpStarted = true
-
-  --Notifies readiness
-  game.StarterGui:SetCore("SendNotification", {Title="Misc"; Text="Infinite Jump Activated!"; Duration=5;})
-
-  --The actual infinite jump
-  local plr = game:GetService('Players').LocalPlayer
-  local m = plr:GetMouse()
-  m.KeyDown:connect(function(k)
-    if _G.infinjump then
-      if k:byte() == 32 then
-      humanoid = game:GetService'Players'.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
-      humanoid:ChangeState('Jumping')
-      wait()
-      humanoid:ChangeState('Seated')
-      end
-    end
-  end)
-end
-    end
-})
+local Tab = Window:CreateTab("Help")
+local Section = Tab:CreateSection("If none of these things go to our discord and ask the owner: Karl")
+local Button = Tab:CreateButton({
+   Name = "Discord | Click To Copy",
+   Callback = function()
+setclipboard("discord.gg/mtjsvyNkYG")
+   end,
+   })
+local Section = Tab:CreateSection("Scripts Help (incase you dont know how to use them or what they do")
+local Paragraph = Tab:CreateParagraph({Title = "Coming Soon", Content = "Was too lazy to do it now.. most likely will happen the next update"})
