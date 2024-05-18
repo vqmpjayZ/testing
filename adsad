@@ -338,7 +338,7 @@ local Section = Tab:AddSection({
     Name = "-Tokens-"
 })
 
-_Tab:AddToggle({
+ Tab:AddToggle({
     Name = "Token Autofarm (buggy)",
     Default = false,
     Callback = function(Value)
