@@ -15,7 +15,7 @@ local Section = Tab:AddSection({
 local playerName = game.Players.LocalPlayer.Name
 
 Tab:AddButton({
-    Name = "Welcome " .. playerName .. "Join our discord: https://dsc.gg/v3rge",
+    Name = "Welcome " .. playerName .. " Join our discord: https://dsc.gg/v3rge",
     Callback = function()
     end
 })
@@ -338,11 +338,11 @@ local Section = Tab:AddSection({
     Name = "-Tokens-"
 })
 
- Tab:AddToggle({
+Tab:AddToggle({
     Name = "Token Autofarm (buggy)",
     Default = false,
     Callback = function(Value)
-        _G.TokenAutofarm = not _G.TokenAutofarm or true -- Initialize or toggle the value
+        _G.TokenAutofarm = not _G.TokenAutofarm or true -- Toggle the value
         while _G.TokenAutofarm do
             wait(0)
             local Target = game:GetService("ReplicatedStorage").LoginRewards
@@ -350,18 +350,17 @@ local Section = Tab:AddSection({
         end
     end
 })
-
-Tab:AddButton({
-    Name = "Grab 10 Tokens",
-    Callback = function()
-        local Target = game:GetService("ReplicatedStorage").LoginRewards
-        Target:FireServer()
-    end
+  Tab:AddButton({
+   Name = "Grab 10 Tokens",
+   Callback = function()
+local Target = game:GetService("ReplicatedStorage").LoginRewards;
+Target:FireServer();
+      end
 })
 
 local Section = Tab:AddSection({
     Name = "-Free items-"
-})
+}) 
 
   Tab:AddButton({
    Name = "Furniture",
